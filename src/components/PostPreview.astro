@@ -9,14 +9,39 @@ export interface Props {
 const { date, description, title, url } = Astro.props;
 ---
 
-<div>
-  <a href={url}><h3>{title}</h3></a>
-  <time>{date}</time>
-  <p>{description}</p>
-  <a href={url}>Read the article ➡️</a>
+<div class="wrapper">
+  <a class="title" href={url}><h3>{title}</h3></a>
+  <time class="date">{date}</time>
+  <p class="description">{description}</p>
+  <a class="read-more" href={url}>Read the article ➡️</a>
 </div>
 
 <style>
+  .date {
+    font-size: 0.875rem;
+    font-style: italic;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .read-more {
+    font-size: 1rem;
+  }
+
+  .title {
+    font-size: 1.125rem;
+  }
+
+  .wrapper {
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    margin: 0;
+  }
+
   a {
     text-decoration: none;
   }

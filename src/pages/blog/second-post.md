@@ -1,6 +1,6 @@
 ---
 layout: "../../layouts/BlogPost.astro"
-title: "Second post"
+title: "How I've built my blog with Astro"
 description: "Lorem ipsum dolor sit amet"
 pubDate: "Jul 22 2022"
 heroImage: "/placeholder-hero.jpg"
