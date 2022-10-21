@@ -1,0 +1,50 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import PostPreview from "../components/PostPreview.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+import type { Post } from "../types";
+
+interface MarkdownPosts {
+  frontmatter: Post;
+  url: string;
+}
+
+// Use Astro.glob() to fetch all posts, and then sort them by date.
+const markdownPosts = (await Astro.glob(
+  "./blog/*.{md,mdx}"
+)) as MarkdownPosts[];
+
+const posts = markdownPosts.sort(
+  (a, b) =>
+    new Date(b.frontmatter.pubDate).valueOf() -
+    new Date(a.frontmatter.pubDate).valueOf()
+);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <section>
+        {
+          posts.map((post) => (
+            <PostPreview
+              date={post.frontmatter.pubDate}
+              description={post.frontmatter.description}
+              title={post.frontmatter.title}
+              url={post.url}
+            />
+          ))
+        }
+      </section>
+    </main>
+    <Footer />
+  </body>
+</html>

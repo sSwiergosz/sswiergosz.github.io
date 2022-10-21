@@ -1,16 +1,16 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../config";
-import me from "../../public/me.jpeg";
+import me from "../../me.jpeg";
 ---
 
 <header>
 	<h2>
-		<img src={me} alt="Image of an author" />
-		{SITE_TITLE}
+		<img height={80} width={80} src={me} alt="Image of an author" />
+		<a href="/">{SITE_TITLE}</a>
 	</h2>
 	<nav>
-		<HeaderLink href="/">Blog</HeaderLink>
+		<HeaderLink href="/blog">Blog</HeaderLink>
 		<HeaderLink href="/about">About</HeaderLink>
 		<HeaderLink
 			href="https://www.linkedin.com/in/szymon-swiergosz"
@@ -22,6 +22,9 @@ import me from "../../public/me.jpeg";
 	</nav>
 </header>
 <style>
+	a {
+		text-decoration: none;
+	}
 	header {
 		margin: 0em 0 2em;
 	}
@@ -33,7 +36,9 @@ import me from "../../public/me.jpeg";
 	}
 	img {
 		border-radius: 50%;
-		height: 5rem;
-		width: auto;
+	}
+	nav a {
+		border-radius: 5px;
+		padding: 5px 10px;
 	}
 </style>
