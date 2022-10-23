@@ -10,9 +10,33 @@ const isActive = href === Astro.url.pathname;
 </a>
 <style>
 	a {
-		display: inline-block;
-		text-decoration: none;
+		color: #ab3428;
+		display: inline;
+		position: relative;
+		overflow: hidden;
 	}
+	a:after {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		right: 0;
+		width: 0;
+		bottom: -5px;
+		background: #f49e4c;
+		height: 2px;
+		transition-property: width;
+		transition-duration: 0.3s;
+		transition-timing-function: ease-out;
+	}
+
+	a:hover:after,
+	a:focus:after,
+	a:active:after {
+		left: 0;
+		right: auto;
+		width: 100%;
+	}
+
 	a.active {
 		font-weight: bolder;
 	}

@@ -9,12 +9,14 @@ export interface Props {
 const { date, description, title, url } = Astro.props;
 ---
 
-<div class="wrapper">
-  <a class="title" href={url}><h3>{title}</h3></a>
-  <time class="date">{date}</time>
-  <p class="description">{description}</p>
-  <a class="read-more" href={url}>Read the article ➡️</a>
-</div>
+<a href={url}>
+  <div class="wrapper">
+    <h3>{title}</h3>
+    <time class="date">{date}</time>
+    <p class="description">{description}</p>
+    <p class="read-more">Read the article ➡️</p>
+  </div>
+</a>
 
 <style>
   .date {
@@ -27,7 +29,9 @@ const { date, description, title, url } = Astro.props;
   }
 
   .read-more {
+    color: #ab3428;
     font-size: 1rem;
+    margin: 0;
   }
 
   .title {
@@ -36,9 +40,15 @@ const { date, description, title, url } = Astro.props;
 
   .wrapper {
     background-color: #0f2435;
+    border: 1px solid #0f2435;
     border-radius: 10px;
     margin-bottom: 2rem;
     padding: 15px;
+    transition: border-color 0.4s ease;
+  }
+
+  .wrapper:hover {
+    border-color: #fff;
   }
 
   h3 {
