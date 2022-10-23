@@ -3,6 +3,8 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
+
+import { mainBackgroundColor, mainFontColor } from "../styles/const";
 ---
 
 <!DOCTYPE html>
@@ -16,5 +18,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
       <slot />
     </main>
     <Footer />
+    <style define:vars={{ mainBackgroundColor, mainFontColor }}>
+      body {
+        background-color: var(--mainBackgroundColor);
+        color: var(--mainFontColor);
+      }
+    </style>
   </body>
 </html>

@@ -3,12 +3,6 @@
   https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
-:root {
-	--heading-color: #f49e4c;
-	--link-color: #ab3428;
-	--main-background: #011627;
-	--font-color: #ffffff;
-}
 
 body {
 	font-family: Verdana, sans-serif;
@@ -16,23 +10,9 @@ body {
 	padding: 20px;
 	max-width: 65ch;
 	text-align: left;
-	background-color: var(--main-background);
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	line-height: 1.5;
-	color: var(--font-color);
-}
-
-h1,
-h2,
-h2 a,
-h3,
-h4,
-h5,
-h6,
-strong,
-b {
-	color: var(--heading-color);
 }
 
 a {

@@ -1,4 +1,6 @@
 ---
+import { mainLinkColor, mainHeadingColor } from "../styles/const";
+
 export interface Props extends astroHTML.JSX.AnchorHTMLAttributes {}
 
 const { href, class: className, ...props } = Astro.props;
@@ -8,9 +10,9 @@ const isActive = href === Astro.url.pathname;
 <a href={href} class:list={[className, { active: isActive }]} {...props}>
 	<slot />
 </a>
-<style>
+<style define:vars={{ mainLinkColor, mainHeadingColor }}>
 	a {
-		color: #ab3428;
+		color: var(--mainLinkColor);
 		display: inline;
 		position: relative;
 		overflow: hidden;
@@ -22,7 +24,7 @@ const isActive = href === Astro.url.pathname;
 		right: 0;
 		width: 0;
 		bottom: -5px;
-		background: #f49e4c;
+		background: var(--mainHeadingColor);
 		height: 2px;
 		transition-property: width;
 		transition-duration: 0.3s;

@@ -1,4 +1,9 @@
 ---
+import {
+  mainHeadingColor,
+  mainLinkColor,
+  mainLightBackgroundColor,
+} from "../styles/const";
 export interface Props {
   date: string;
   description: string;
@@ -18,7 +23,9 @@ const { date, description, title, url } = Astro.props;
   </div>
 </a>
 
-<style>
+<style
+  define:vars={{ mainHeadingColor, mainLinkColor, mainLightBackgroundColor }}
+>
   .date {
     font-size: 0.875rem;
     font-style: italic;
@@ -29,7 +36,7 @@ const { date, description, title, url } = Astro.props;
   }
 
   .read-more {
-    color: #ab3428;
+    color: var(--mainLinkColor);
     font-size: 1rem;
     margin: 0;
   }
@@ -39,8 +46,8 @@ const { date, description, title, url } = Astro.props;
   }
 
   .wrapper {
-    background-color: #0f2435;
-    border: 1px solid #0f2435;
+    background-color: var(--mainLightBackgroundColor);
+    border: 1px solid var(--mainLightBackgroundColor);
     border-radius: 10px;
     margin-bottom: 2rem;
     padding: 15px;
@@ -52,6 +59,7 @@ const { date, description, title, url } = Astro.props;
   }
 
   h3 {
+    color: var(--mainHeadingColor);
     margin: 0;
   }
 

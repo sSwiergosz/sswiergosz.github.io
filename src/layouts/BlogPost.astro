@@ -1,6 +1,7 @@
 ---
 import type { Post } from "../types";
 import PageLayout from "./PageLayout.astro";
+import { mainHeadingColor } from "../styles/const";
 
 export interface Props {
 	content: Post;
@@ -28,8 +29,9 @@ const {
 	</article>
 </PageLayout>
 
-<style>
+<style define:vars={{ mainHeadingColor }}>
 	.title {
+		color: var(--mainHeadingColor);
 		font-size: 2em;
 		margin: 0.25em 0 0;
 	}

@@ -2,6 +2,7 @@
 import HeaderLink from "./HeaderLink.astro";
 import { SITE_TITLE } from "../config";
 import me from "/me.jpeg";
+import { mainHeadingColor } from "../styles/const";
 ---
 
 <header>
@@ -21,7 +22,7 @@ import me from "/me.jpeg";
 		</HeaderLink>
 	</nav>
 </header>
-<style>
+<style define:vars={{ mainHeadingColor }}>
 	a {
 		text-decoration: none;
 	}
@@ -33,6 +34,9 @@ import me from "/me.jpeg";
 		align-items: center;
 		gap: 1.25rem;
 		margin: 0.5em 0 0.75em;
+	}
+	h2 a {
+		color: var(--mainHeadingColor);
 	}
 	img {
 		border-radius: 50%;
