@@ -10,6 +10,6 @@ heroImage: "/placeholder-about.jpg"
 
 I'm frontend enthusiast. Love JavaScript & TypeScript.
 
-I work as a Software Engineer @ Fandom. It's such a great feeling to be involved in creating a platform for milions of people around the world.
+Currently working as a Software Engineer @ <a class="link" href="https://www.fandom.com">Fandom</a>.
 
 If you have any questions - feel free to <a href="mailto:szymon.swiergosz@gmail.com">contact me</a> 📧 📧 📧

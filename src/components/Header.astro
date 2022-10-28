@@ -1,6 +1,5 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
-import { SITE_TITLE } from "../config";
 import me from "/me.jpeg";
 import { mainHeadingColor } from "../styles/const";
 ---
@@ -8,7 +7,10 @@ import { mainHeadingColor } from "../styles/const";
 <header>
 	<h2>
 		<img height={80} width={80} src={me} alt="Image of an author" />
-		<a href="/">{SITE_TITLE}</a>
+		<a href="/">
+			<span>Software Engineering blog</span>
+			<small>Szymon Świergosz</small>
+		</a>
 	</h2>
 	<nav>
 		<HeaderLink href="/blog">Blog</HeaderLink>
@@ -37,6 +39,11 @@ import { mainHeadingColor } from "../styles/const";
 	}
 	h2 a {
 		color: var(--mainHeadingColor);
+		display: flex;
+		flex-direction: column;
+	}
+	h2 small {
+		font-size: 0.65em;
 	}
 	img {
 		border-radius: 50%;

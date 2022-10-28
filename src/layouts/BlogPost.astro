@@ -1,14 +1,14 @@
 ---
 import type { Post } from "../types";
 import PageLayout from "./PageLayout.astro";
-import { mainHeadingColor } from "../styles/const";
+import { mainHeadingColor, mainLinkColor } from "../styles/const";
 
 export interface Props {
 	content: Post;
 }
 
 const {
-	content: { title, pubDate, updatedDate, heroImage },
+	content: { title, pubDate, updatedDate, heroImage, infoboxText },
 } = Astro.props;
 ---
 
@@ -29,14 +29,16 @@ const {
 	</article>
 </PageLayout>
 
-<style define:vars={{ mainHeadingColor }}>
+<style define:vars={{ mainHeadingColor, mainLinkColor }}>
 	.title {
 		color: var(--mainHeadingColor);
 		font-size: 2em;
 		margin: 0.25em 0 0;
 	}
 	hr {
-		border-top: 1px solid #ddd;
 		margin: 1rem 0;
+	}
+	article :global(a) {
+		color: var(--mainLinkColor);
 	}
 </style>

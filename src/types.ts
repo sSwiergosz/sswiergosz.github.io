@@ -4,4 +4,5 @@ export interface Post {
   pubDate: string;
   updatedDate: string;
   heroImage?: string;
+  infoboxText?: string;
 };

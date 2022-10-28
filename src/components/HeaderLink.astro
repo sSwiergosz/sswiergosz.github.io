@@ -20,23 +20,22 @@ const isActive = href === Astro.url.pathname;
 	a:after {
 		content: "";
 		position: absolute;
+		left: 0;
 		z-index: -1;
-		right: 0;
-		width: 0;
+		visibility: hidden;
+		opacity: 0;
 		bottom: -5px;
 		background: var(--mainHeadingColor);
 		height: 2px;
-		transition-property: width;
-		transition-duration: 0.3s;
-		transition-timing-function: ease-out;
+		width: 100%;
+		transition: visibility 0s, opacity 0.2s linear;
 	}
 
 	a:hover:after,
 	a:focus:after,
 	a:active:after {
-		left: 0;
-		right: auto;
-		width: 100%;
+		visibility: visible;
+		opacity: 1;
 	}
 
 	a.active {
