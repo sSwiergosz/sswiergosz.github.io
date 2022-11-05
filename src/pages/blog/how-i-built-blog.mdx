@@ -1,0 +1,43 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "Astro, Islands & My blog"
+description: "Some time ago I came across a very interesting article in a newsletter. At first glance it was nothing new - another frontend framework but the more..."
+pubDate: "Jul 22 2022"
+heroImage: "/placeholder-hero.jpg"
+---
+
+Some time ago I came across a very interesting article in a newsletter. At first glance this was nothing new - another frontend framework but the more I read, the more curious I became. An author was describing that this new tool doesn't have a stable version, but is already used by Google, Ikea or The Guardian. Going further I found out that aformentioned framework works based on a design pattern called **Island architecture**. That was something new for me - I've never heard of something similar. I finished my reading and decided that I will give it a try - this tool is [Astro](https://astro.build/). Let me tell you more about it - how does it work, why do I think it's super cool and why you should give it a try!
+
+<div style="width: 100%; text-align: center;">* * *</div>
+
+Astro is a meta-framework and static site builder which was developed to create fast and content-focused websites. It uses **Astro Islands** which is special implementation of [Island architecture](https://www.patterns.dev/posts/islands-architecture/). The main idea behind Astro Islands is to render an individual, non-blocking, interactive components among static HTML elements. By rendering islands in parallel and hydrating them in isolation components don't have to wait for others to render what results in increasing page speed.
+
+It's worth to mention that Astro (by default) generates website with **no** client-side JavaScript. It progressively loads only those components that are needed at the moment e.g. during the initial load, only those components that are visible in the viewport will be rendered. What's more you can directly describe how Astro should render these components - if it should be only on client/server side, what is the priority during loading or if it loads when certain CSS criterias are met. That is possible to achive by using these five directives:
+- client:load - load and hydrate a component as soon as possible
+- client:idle - load and hydrate a component after initial load is done
+- client:visible - load and hydrate a component after it is visible in the viewport
+- client:media - load and hydrate a component only if CSS media query criterias are met
+- client:only - omits the server-rendering, renders the component only on client side.
+
+What else interested me was the fact that Astro provides first-class support for many popular frontend frameworks & libraries. You can use code written in React, Vue, Angular, Preact, Svelte, Solid and many more. The only thing you have to do is to install a specific plugin and that's it! It's amazing how easily you're able to integrate different components in a single app. All of that is possible because Astro renders all the components to HTML and then strips out all of the JavaScript.
+
+Why I've decided to use Astro to build my blog? There are couple of reasons. Let's start with the fact that Astro is blazingly fast. Zero JavaScript runtime, island architecture and replacing unused JavaScript with lightweight HTML results in faster loads and time-to-interactive (TTI). Next thing is that Astro is great when it comes to SEO. The framework is taking care of the most important aspects, generates needed tags and directives. Also static site generation is beneficial in that matter. These are the Lighthouse metrics that I was able to get almost out of the box after few moments of work:
+
+<figure>
+  <img
+    src="/mobileLighthouse.png"
+    alt="Lighthouse mobile result"
+    width={720}
+    height="auto"
+  />
+  <figcaption style="text-align: center;">Lighthouse result for mobile</figcaption>
+</figure>
+<figure>
+  <img
+    src="/desktopLighthouse.png"
+    alt="Lighthouse desktop result"
+    width={720}
+    height="auto"
+  />
+  <figcaption style="text-align: center;">Lighthouse result for desktop</figcaption>
+</figure>
