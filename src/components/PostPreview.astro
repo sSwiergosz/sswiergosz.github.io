@@ -12,12 +12,14 @@ export interface Props {
 }
 
 const { date, description, title, url } = Astro.props;
+
+const formattedDate = new Date(date).toLocaleDateString("pl-PL");
 ---
 
 <a href={url}>
   <div class="wrapper">
     <h3>{title}</h3>
-    <time class="date">{date}</time>
+    <time class="date">{formattedDate}</time>
     <p class="description">{description}</p>
     <p class="read-more">Read the article ➡️</p>
   </div>
@@ -28,7 +30,6 @@ const { date, description, title, url } = Astro.props;
 >
   .date {
     font-size: 0.875rem;
-    font-style: italic;
   }
 
   .description {

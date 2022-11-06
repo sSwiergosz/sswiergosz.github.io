@@ -10,6 +10,8 @@ export interface Props {
 const {
 	content: { title, pubDate, updatedDate, heroImage },
 } = Astro.props;
+
+const formattedDate = new Date(pubDate).toLocaleDateString("pl-PL");
 ---
 
 <PageLayout>
@@ -26,7 +28,7 @@ const {
 			)
 		}
 		<h1 class="title">{title}</h1>
-		{pubDate && <time>{pubDate}</time>}
+		{formattedDate && <time>{formattedDate}</time>}
 		{
 			updatedDate && (
 				<div>
