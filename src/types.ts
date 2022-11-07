@@ -5,4 +5,5 @@ export interface Post {
   updatedDate: string;
   heroImage?: string;
   infoboxText?: string;
+  numOfWords?: number;
 };

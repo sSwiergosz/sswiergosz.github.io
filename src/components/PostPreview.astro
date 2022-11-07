@@ -4,22 +4,30 @@ import {
   mainLinkColor,
   mainLightBackgroundColor,
 } from "../styles/const";
+import { countReadingTime, formatDate } from "../utils";
 export interface Props {
   date: string;
   description: string;
   title: string;
   url: string;
+  numOfWords?: number;
 }
 
-const { date, description, title, url } = Astro.props;
+const { date, description, title, url, numOfWords = 0 } = Astro.props;
 
-const formattedDate = new Date(date).toLocaleDateString("pl-PL");
+const formattedDate = formatDate(date);
+const readingTime = countReadingTime(numOfWords);
 ---
 
 <a href={url}>
   <div class="wrapper">
     <h3>{title}</h3>
     <time class="date">{formattedDate}</time>
+    {
+      readingTime && (
+        <p class="reading-time">{`Estimated reading time: ${readingTime} minutes`}</p>
+      )
+    }
     <p class="description">{description}</p>
     <p class="read-more">Read the article ➡️</p>
   </div>
@@ -28,8 +36,12 @@ const formattedDate = new Date(date).toLocaleDateString("pl-PL");
 <style
   define:vars={{ mainHeadingColor, mainLinkColor, mainLightBackgroundColor }}
 >
-  .date {
+  .date,
+  .reading-time {
     font-size: 0.875rem;
+  }
+  .reading-time {
+    font-style: italic;
   }
 
   .description {

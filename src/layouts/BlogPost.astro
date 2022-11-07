@@ -2,16 +2,19 @@
 import type { Post } from "../types";
 import PageLayout from "./PageLayout.astro";
 import { mainHeadingColor, mainLinkColor } from "../styles/const";
+import { countReadingTime, formatDate } from "../utils";
 
 export interface Props {
 	content: Post;
 }
 
 const {
-	content: { title, pubDate, updatedDate, heroImage },
+	content: { title, pubDate, updatedDate, heroImage, numOfWords = 0 },
 } = Astro.props;
 
-const formattedDate = new Date(pubDate).toLocaleDateString("pl-PL");
+const formattedPubDate = formatDate(pubDate);
+const formattedUpdatedDate = formatDate(updatedDate);
+const readingTime = countReadingTime(numOfWords);
 ---
 
 <PageLayout>
@@ -28,12 +31,17 @@ const formattedDate = new Date(pubDate).toLocaleDateString("pl-PL");
 			)
 		}
 		<h1 class="title">{title}</h1>
-		{formattedDate && <time>{formattedDate}</time>}
+		{formattedPubDate && <time>{formattedPubDate}</time>}
 		{
-			updatedDate && (
+			formattedUpdatedDate && (
 				<div>
-					Last updated on <time>{updatedDate}</time>
+					Last updated on <time>{formattedUpdatedDate}</time>
 				</div>
+			)
+		}
+		{
+			readingTime && (
+				<p class="reading-time">{`Estimated reading time: ${readingTime} minutes`}</p>
 			)
 		}
 		<hr />
@@ -54,6 +62,10 @@ const formattedDate = new Date(pubDate).toLocaleDateString("pl-PL");
 	}
 	.article-content {
 		text-align: justify;
+	}
+	.reading-time {
+		font-size: 0.875rem;
+		font-style: italic;
 	}
 	article :global(a) {
 		color: var(--mainLinkColor);

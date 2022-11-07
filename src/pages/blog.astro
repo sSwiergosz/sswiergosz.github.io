@@ -29,6 +29,7 @@ const posts = markdownPosts.sort(
           description={post.frontmatter.description}
           title={post.frontmatter.title}
           url={post.url}
+          numOfWords={post.frontmatter?.numOfWords}
         />
       ))
     }
