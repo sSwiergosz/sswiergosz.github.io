@@ -40,7 +40,7 @@ const readingTime = countReadingTime(numOfWords);
 			)
 		}
 		{
-			readingTime && (
+			readingTime > 0 && (
 				<p class="reading-time">{`Estimated reading time: ${readingTime} minutes`}</p>
 			)
 		}
