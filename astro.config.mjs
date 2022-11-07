@@ -6,5 +6,6 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://sswiergosz.github.io',
+	base: '/blog',
 	integrations: [mdx(), sitemap()],
 });
