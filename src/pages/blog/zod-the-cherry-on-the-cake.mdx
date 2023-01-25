@@ -1,0 +1,74 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "Zod - the cherry on the cake"
+description: "I'll start with a simple but honest statement - I love TypeScript. Honestly, I can't imagine writing web apps without it. It helps me to avoid a lot of potential mistakes as well as keep away from many JavaScript quirks. And just when I thought TypeScript..."
+pubDate: "2023-01-25"
+heroImage: "/zod-logo.svg"
+numOfWords: 1065
+---
+
+I'll start with a simple but honest statement - I love TypeScript. Honestly, I can't imagine writing web apps without it. It helps me to avoid a lot of potential mistakes as well as keep away from many JavaScript quirks. And just when I thought TypeScript couldn't get any better, Zod showed up. A small and light schema validator that is of great importance in everyday work. If you're not using it, then I think that's a huge mistake. I'll try explaining why you should start using it in your projects.
+
+<div style="width: 100%; text-align: center;">* * *</div>
+
+As I mentioned in the beginning, TypeScript is a great programming language, but it struggles in some aspects. One of the blind spots is that TypeScript has to be compiled into JavaScript under the hood because browsers and Node.js process only plain JavaScript. During that operation, all of your types are stripped. So they are there for you only at compile time and not runtime. That's where things start to get complicated. Because of the lack of checking types at the runtime, you can't be sure that your program will work when for example, data from external sources change its structure or when the user provides data in an incorrect format to your app. If you're JS/TS developer, I'm sure you're very familiar with the fan's favorite error `Cannot read undefined of undefined`. It happens because you are trying to refer to a field that does not exist. Let's look at the example:
+
+<figure style="margin: 30px 0;">
+  <img
+    src="/zod-first-example.png"
+    alt="Fetching data with possibly undefined object"
+    width={720}
+    height="auto"
+    style="box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.5); border-radius: 10px;"
+  />
+  <figcaption style="text-align: center;">An example of problematic fetch which might return undefined values</figcaption>
+</figure>
+
+That is why we need something like schema validation. It's a process of verifying that a data structure conforms to a specific schema. You can use it to ensure the validity of input data or to document and enforce your application's data structures.
+
+After this slightly long introduction, it's time to move on to the actual topic of today's post. So what exactly is Zod? According to the documentation, it's a "TypeScript-first schema declaration and validation library". In other words, it's a validator that ensures the data you use is in the correct format. Just that, or that much! For me, it's the second one as having control over data types during the program's life cycle is something I want to have all the time.
+
+Let's look at how validation in Zod works. It starts with defining your schema (your structure) by creating a JavaScript object with proper key/value pairs. Then you need to call method `parse` or `safeParse` and that's it! Zod will quickly compare the data you've provided with the schema. If there are any differences, you will get an error. Let's look at the example to illustrate that process better:
+
+<figure style="margin: 30px 0;">
+  <img
+    src="/zod-second-example.png"
+    alt="Validating response with Zod"
+    width={720}
+    height="auto"
+    style="box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.5); border-radius: 10px;"
+  />
+  <figcaption style="text-align: center;">An example of how easily can we validate response with Zod</figcaption>
+</figure>
+
+As you can see, I defined a simple schema that consists of two fields - name and age. The first one is a string, and a second is a number. Both of them are required. In the next step, we define a function that requests an external source. Finally, we see the validation that I've been writing since the beginning - we call the `parse` method on the schema with actual data provided as a parameter. In the end, the data or an error is returned. Seems pretty straightforward, right? When we call method `getUserById` inside our component **we can be sure** that the user object has proper format. We can forget about using the chaining operator or handling millions of other errors that might appear (missing properties, different keys that we've defined, potential undefined as a response). If the program passed the parse function, we are 100% sure that the data is correct. It's also worth mentioning that I didn't have to create a separate TS type for the User - I inferred it from Zod's schema. How great is that? Zod is designed to be TypeScript-first, which means the library will automatically infer a static TypeScript type for your data structures. That eliminates the need to declare types twice - once in Zod schema and again in TS. It will save a lot of typing and help you keep your code changes in sync.
+
+I'd like to show one more example. This time it will not be connected with fetching data from external source but to validating form data provided by users. We should **always** validate input from our users, no matter what. Zod is also a perfect tool for that! Thanks to a wide range of different validators you can validate almost everything. You can even check if it's string, number, boolean, and even things like uuid, cuid, regex, url, email and many more. Zod can do that all.
+
+<figure style="margin: 30px 0;">
+  <img
+    src="/zod-form-validation.png"
+    alt="Validating form with Zod"
+    width={720}
+    height="auto"
+    style="box-shadow: 0px 0px 24px 0px rgba(0, 0, 0, 0.5); border-radius: 10px;"
+  />
+  <figcaption style="text-align: center;">Zod can also easily validate form data</figcaption>
+</figure>
+
+What are the other advantages of Zod?
+- Zod has zero dependencies, which means that you can install and use Zod without any other libraries, and it will help you keep your bundle size small.
+- Zod works in Node.js and all major browsers. That makes it a good fit for projects that need to support a wide range of platforms.
+- Zod's API is concise and chainable. That makes it easy to create complex data schemas.
+
+I could start listing different functions that Zod offers, but there are so many of them that it would take a lot of time. Seriously, you can create schemas for every TypeScript type and even more - check it out here on official library docs https://zod.dev/.
+
+Alright so Zod is so cool and can make our DX even better using TypeScript. Does it have any disadvantages? One of Zod's biggest flaws is its documentation. Everything you need is there, everything is described, but the use of this documentation is not very intuitive. In my opinion, some "real" usage examples are missing, not just individual functions taken out of context. Since it's a relatively new library, the community isn't that big. Sometimes I had trouble finding satisfactory answers to my questions. I assume it's only temporary and the community will grow day by day.
+
+To sum up - I immediately fell in love with Zod. I believe it's a must-have library for your project if you use TypeScript. The possibility of having full control over data that come to your app and validating it is powerful and can save you a lot of time by avoiding a wide range of mistakes. I'm more than sure that in the not-so-long future, Zod is going to be the industry standard. Give it a try!
+
+<span style="text-align: initial;">
+<h2 style="margin-bottom: 0;">Links & references</h2>
+- Zod docs (https://zod.dev/)
+- Great Zod tutorial by Matt Pocock (https://www.totaltypescript.com/tutorials/zod)
+</span>

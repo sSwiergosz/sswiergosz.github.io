@@ -21,13 +21,7 @@ const readingTime = countReadingTime(numOfWords);
 	<article>
 		{
 			heroImage && (
-				<img
-					width={720}
-					height={360}
-					src={heroImage}
-					alt="Astro image"
-					data-sizes="100vw"
-				/>
+				<img width={720} src={heroImage} alt="Astro image" data-sizes="100vw" />
 			)
 		}
 		<h1 class="title">{title}</h1>
@@ -69,5 +63,9 @@ const readingTime = countReadingTime(numOfWords);
 	}
 	article :global(a) {
 		color: var(--mainLinkColor);
+	}
+
+	img {
+		max-height: 360px;
 	}
 </style>
