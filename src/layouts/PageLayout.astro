@@ -5,16 +5,14 @@ import Footer from "../components/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 
 import { mainBackgroundColor, mainFontColor } from "../styles/const";
+
+const { image } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <BaseHead
-      title={SITE_TITLE}
-      description={SITE_DESCRIPTION}
-      image="/me.jpg"
-    />
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image={image} />
   </head>
   <body>
     <Header title={SITE_TITLE} />

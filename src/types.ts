@@ -6,4 +6,5 @@ export interface Post {
   heroImage?: string;
   infoboxText?: string;
   numOfWords?: number;
+  ogImage?: string;
 };
