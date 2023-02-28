@@ -7,16 +7,14 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../config";
 import { mainBackgroundColor, mainFontColor } from "../styles/const";
 
 const { image, title } = Astro.props;
+
+const pageTitle = title ? `${title} | ${SITE_TITLE}` : SITE_TITLE;
 ---
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <BaseHead
-      title={`${title} | ${SITE_TITLE}`}
-      description={SITE_DESCRIPTION}
-      image={image}
-    />
+    <BaseHead title={pageTitle} description={SITE_DESCRIPTION} image={image} />
   </head>
   <body>
     <Header title={SITE_TITLE} />
