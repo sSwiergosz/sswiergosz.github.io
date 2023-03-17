@@ -1,0 +1,87 @@
+---
+layout: "../../layouts/BlogPost.astro"
+title: "What are JavaScript Proxies?"
+description: "During our daily work, we often use different tools and we don't necessarily wonder how specific aspects of code work. Let's think for a moment about an ordinary front-end engineer. They probably use React or Angular..."
+pubDate: "2023-03-17"
+heroImage: "/js-background.jpeg"
+ogImage: "/js-background.jpeg"
+numOfWords: 963
+---
+
+import { Code } from 'astro/components';
+
+During our daily work, we often use different tools and we don't necessarily wonder how specific aspects of code work. Let's think for a moment about an ordinary front-end engineer. They probably use React or Angular, adding some state management like Redux and maybe use Zod because it's the super cool library (sorry, but I do love Zod ❤️). We use libraries/frameworks which have a high level of abstraction and implement a lot of functionalities for us. Sometimes I like to stop for a moment and think about how different things work under the hood - what are the specifics of a language that allow us to perform more complicated operations? One example of that kind of feature is JavaScript Proxy. They are a powerful mechanism that allows for modifying the standard behavior of objects and I'd like to tell a thing or two about it today. Let's see what they are and why they are interesting.
+
+<div style="width: 100%; text-align: center;">* * *</div>
+
+I bet that if you're a JavaScript developer then you used Proxies (indirectly) during your professional career. They are used by, among others, Solidjs, Immer, or Redux Toolkit. But what exactly is the Proxy? The official documentation states that: 
+
+"*The Proxy object enables you to create a proxy for another object, which can intercept and redefine fundamental operations for that object.*".
+
+And basically, that's it. Proxies can alter the default behavior of objects. You can override some of the internal JS methods - thanks to that you have more control over your object and you're able to add new features to it. Below you can find an example of how the simplest Proxy object could look like:
+
+<Code code={`const target = {
+  key1: "hello",
+  key2: "world",
+};
+
+const handler = {};
+
+const proxy = new Proxy(target, handler);`} lang="js" />
+
+A single Proxy object consists of:
+- *target* which is the actual object you want to apply proxy on
+- *handler* that defines which operations will be intercepted and overwritten (handlers are also called *traps*)
+
+In this example, we didn't do anything interesting. Our handler object was empty so there were no differences between an object and a proxied object. Let's try to add some content to the handler:
+
+<Code code={`const target = {
+  key1: "hello",
+  key2: "world",
+};
+
+const handler = {
+  get(target, prop, receiver) {
+    return "Szymon";
+  },
+};
+
+const proxy = new Proxy(target, handler);`} lang="js" />
+
+The result of accessing properties of this object:
+
+<Code code={`console.log(proxy.key1); // Szymon
+console.log(proxy.key2); // Szymon`} lang="js" />
+
+As you see in the example we're intercepting an internal `get` method. Instead of returning values from the original object, we return a hardcoded string every time. Here are some of the traps that can be defined in the handler object:
+- get(target, property, receiver): Intercept property access on the proxy object.
+- set(target, property, value, receiver): Intercept property assignment on the proxy object.
+- apply(target, thisArg, argumentsList): Intercept function invocation on the proxy object.
+- construct(target, argumentsList, newTarget): Intercept object instantiation using the new operator.
+- has(target, property): Intercept the in operator when used with the proxy object.
+
+Alright, it looks intriguing. The question is - what can I use them for? What are the use cases for Proxies? Let's see some of them (I chose simple examples that are possible to implement quickly and I didn't focus on things like lazy loading which also could be implemeneted with Proxies):
+
+#### Tracing property access
+You can use a Proxy object to trace property access on an object, which can be useful for debugging or performance analysis. By intercepting property access using the get trap, you can log information about which properties are being accessed and how often.
+
+#### Warning about unknown properties
+If you want to prevent an object from being modified with unknown properties, you can use a Proxy object to intercept property assignment using the set trap. If an unknown property is assigned to the object, you can log a warning message or throw an error.
+
+#### Accessing negative array indices
+JavaScript arrays are zero-indexed, meaning that the first element has an index of 0. However, you can use a Proxy object to create an array-like object that allows negative indices to be used. By intercepting property access using the get trap, you can map negative indices to positive indices.
+
+#### Validation
+You can use a Proxy object to validate the properties of an object. By intercepting property assignment using the set trap, you can check the value being assigned and ensure that it meets certain criteria before allowing it to be assigned to the object. For example, you could ensure that a property value is a number within a certain range, or that it matches a certain pattern. If the value fails validation, you can log a warning message or throw an error.
+
+You can check out the example code related to the use cases above <a href="https://codesandbox.io/s/fe-chapter-js-proxies-ywzh35">here</a>.
+
+**To sum up** - JavaScript Proxies are a powerful feature in the language that allow developers to intercept and customize fundamental operations on objects, such as property access and assignment, function invocation, and more. In this blog post, we have explored the concept of Proxies, their syntax and usage, as well as some practical use cases.
+Proxies can be also used to implement more complicated programming patterns, such as lazy initialization, object validation, and security checks. They can also be used to optimize performance, by caching computed values or deferring expensive operations until they are actually needed.
+One important thing to keep in mind when using Proxies is that they introduce additional overhead and complexity to the code, and may not be suitable for all use cases. It is important to carefully evaluate the trade-offs and consider the potential impact on readability, maintainability, and performance.
+
+<span style="text-align: initial;">
+<h2 style="margin-bottom: 0;">Links & references</h2>
+- MDN web docs (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)
+- Code examples (https://codesandbox.io/s/fe-chapter-js-proxies-ywzh35)
+</span>
